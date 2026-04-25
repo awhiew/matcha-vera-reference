@@ -15,7 +15,7 @@
       <nav class="tab-list" aria-label="Reference tabs">
         <button class="tab-button active" type="button" data-tab="web" aria-selected="true">Art Board</button>
         <button class="tab-button" type="button" data-tab="notes" aria-selected="false">Market Research</button>
-        <button class="tab-button" type="button" data-tab="revenue" aria-selected="false">Revenue / Margins</button>
+        <button class="tab-button" type="button" data-tab="revenue" aria-selected="false" aria-label="Revenue and Distribution" title="Revenue and Distribution">Revenue + Distribution</button>
       </nav>
     </header>
 
@@ -132,11 +132,11 @@
         </div>
       </section>
 
-      <section id="panel-revenue" class="tab-panel" data-panel="revenue" aria-label="Revenue and Margins">
+      <section id="panel-revenue" class="tab-panel" data-panel="revenue" aria-label="Revenue and Distribution">
         <div class="panel-heading">
           <p class="eyebrow">Tab 3</p>
-          <h2>Revenue / Margins</h2>
-          <p>Pricing, landed COGS, gross margin and launch forecast notes for checking whether the Matcha Vera model holds before committing to acquisition spend.</p>
+          <h2>Revenue and Distribution</h2>
+          <p>Pricing, landed COGS, gross margin, subscription structure and launch forecast notes for checking whether the Matcha Vera model holds before committing to acquisition spend.</p>
         </div>
         <div class="revenue-layout">
           <article class="note-card lead revenue-hero">
@@ -184,6 +184,74 @@
             </div>
             <p class="card-footnote">Ads, fulfilment variation and overhead sit below these contribution lines, so CAC discipline and bundle mix decide how much profit survives at scale.</p>
           </article>
+
+          <section class="distribution-card" aria-labelledby="distribution-model">
+            <div class="scenario-heading">
+              <span class="note-label">Distribution Model</span>
+              <h3 id="distribution-model">OTP can absorb it; subscription needs a different structure.</h3>
+              <p>Do not prioritise one pouch shipped monthly unless margin is very strong. The logic is simple: same postage cost, higher AOV. If postage is ~$12-$15, spread it across more product, not one unit.</p>
+            </div>
+            <div class="strategy-grid">
+              <article class="strategy-item">
+                <strong>2-pack subscription every 60 days</strong>
+                <span>Cleaner replenishment cycle with postage spread across two pouches.</span>
+              </article>
+              <article class="strategy-item">
+                <strong>3-pack subscription every 90 days</strong>
+                <span>Higher AOV and a better structure for prepaid retention offers.</span>
+              </article>
+              <article class="strategy-item">
+                <strong>Subscribe + save above a minimum order</strong>
+                <span>Protects discounting by requiring enough basket value to carry fulfilment.</span>
+              </article>
+              <article class="strategy-item">
+                <strong>Free shipping only on prepaid/bundled subscriptions</strong>
+                <span>Keeps the strongest incentive attached to margin-safe order types.</span>
+              </article>
+              <article class="strategy-item">
+                <strong>Small shipping fee on single-unit subscription</strong>
+                <span>Single monthly sub is okay, but it should not quietly absorb the full postage burden.</span>
+              </article>
+            </div>
+            <p class="card-footnote">Recommendation: single monthly sub is okay, but 2-pack every 60 days is cleaner because it creates the same postage cost, higher AOV and a better margin structure.</p>
+          </section>
+
+          <section class="scenario-card" aria-labelledby="monthly-subscription-revenue">
+            <div class="scenario-heading">
+              <span class="note-label">Subscription Revenue</span>
+              <h3 id="monthly-subscription-revenue">Subscription revenue scenarios at $59/month.</h3>
+            </div>
+            <div class="scenario-rows revenue-scenario-rows">
+              <div class="scenario-row compact"><strong>50 subs</strong><span>$2,950/mo</span><span>$35.4k/yr</span></div>
+              <div class="scenario-row compact"><strong>100 subs</strong><span>$5,900/mo</span><span>$70.8k/yr</span></div>
+              <div class="scenario-row compact"><strong>250 subs</strong><span>$14,750/mo</span><span>$177k/yr</span></div>
+              <div class="scenario-row compact"><strong>500 subs</strong><span>$29,500/mo</span><span>$354k/yr</span></div>
+              <div class="scenario-row compact"><strong>1,000 subs</strong><span>$59,000/mo</span><span>$708k/yr</span></div>
+            </div>
+          </section>
+
+          <div class="unit-grid">
+            <article class="unit-card">
+              <span class="note-label">Single Monthly Pouch</span>
+              <h3>$22-$31 gross profit per subscriber/month.</h3>
+              <div class="metric-list">
+                <p><span>Revenue</span><strong>$59</strong></p>
+                <p><span>Product COGS</span><strong>~$14-$20</strong></p>
+                <p><span>Shipping/packaging</span><strong>~$12-$15</strong></p>
+                <p><span>Payment/platform fees</span><strong>~$2</strong></p>
+                <p><span>Estimated gross profit</span><strong>$22-$31</strong></p>
+              </div>
+            </article>
+            <article class="unit-card">
+              <span class="note-label">Gross Profit Ranges</span>
+              <h3>Monthly profit depends heavily on shipping structure.</h3>
+              <div class="metric-list">
+                <p><span>100 subs</span><strong>~$2.2k-$3.1k/mo</strong></p>
+                <p><span>500 subs</span><strong>~$11k-$15.5k/mo</strong></p>
+                <p><span>1,000 subs</span><strong>~$22k-$31k/mo</strong></p>
+              </div>
+            </article>
+          </div>
 
           <section class="scenario-card" aria-labelledby="one-time-scenarios">
             <div class="scenario-heading">
