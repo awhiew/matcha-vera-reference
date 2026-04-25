@@ -32,26 +32,27 @@
           <p>All website, product, social and logo boards in one ordered vertical scroll feed. Each image is shown uncropped for screenshot review.</p>
         </div>
         <div class="review-toolbar" aria-label="Art board review tools">
-          <div class="toolbar-group">
+          <div class="toolbar-row filter-primary">
             <span class="toolbar-label">Filter</span>
+            <button class="tool-button star-filter" type="button" data-filter="five" aria-label="Five star references">★★★★★</button>
+            <button class="tool-button star-filter" type="button" data-filter="fourPlus" aria-label="Four stars and above">★★★★+</button>
+            <button class="tool-button star-filter" type="button" data-filter="threePlus" aria-label="Three stars and above">★★★+</button>
+          </div>
+          <div class="toolbar-row filter-secondary">
             <button class="tool-button active" type="button" data-filter="all">All</button>
             <button class="tool-button" type="button" data-filter="unrated">Unrated</button>
-            <button class="tool-button" type="button" data-filter="rated">Rated</button>
-            <button class="tool-button" type="button" data-filter="five">5 stars</button>
-            <button class="tool-button" type="button" data-filter="fourPlus">4+ stars</button>
-            <button class="tool-button" type="button" data-filter="threePlus">3+ stars</button>
             <button class="tool-button" type="button" data-filter="notes">Has notes</button>
           </div>
-          <div class="toolbar-group">
+          <div class="toolbar-row toolbar-actions">
             <label class="toolbar-label" for="review-sort">Sort</label>
             <select id="review-sort" class="review-select">
               <option value="original">Original order</option>
               <option value="highest">Highest rated</option>
               <option value="lowest">Lowest rated</option>
             </select>
+            <button id="export-review" class="export-button" type="button">Export</button>
           </div>
           <div id="review-summary" class="review-summary" aria-live="polite"></div>
-          <button id="export-review" class="export-button" type="button">Export Review</button>
         </div>
         <div id="web-feed" class="reference-feed" aria-live="polite"></div>
       </section>
@@ -137,46 +138,88 @@
           <h2>Revenue / Margins</h2>
           <p>Pricing, landed COGS, gross margin and launch forecast notes for checking whether the Matcha Vera model holds before committing to acquisition spend.</p>
         </div>
-        <div class="notes-grid revenue-grid">
-          <article class="note-card lead">
-            <span class="note-label">Purpose</span>
-            <h3>Revenue targets, pricing maths and unit economics.</h3>
-            <p>Use this tab to review subscription maths, COGS/landed cost, gross margin, fulfilment/shipping, ad spend/CAC, break-even, P&amp;L forecasts and wholesale vs DTC economics.</p>
-          </article>
-          <article class="note-card">
-            <span class="note-label">Pack + Pricing</span>
-            <h3>30 serves at $69 one-time or $59 subscription.</h3>
-            <p>Base landed COGS is $0.85 per serve, or $25.50 per pack. Validation range is $0.70-$1.00 per serve.</p>
-          </article>
-          <article class="note-card">
-            <span class="note-label">One-Time Purchase</span>
-            <h3>$43.50 gross profit per pack.</h3>
-            <p>Revenue $69; landed COGS $25.50; gross margin 63.0%. After payment fees, contribution profit is about $41.99 before shipping, ads and overhead.</p>
-          </article>
-          <article class="note-card">
-            <span class="note-label">Subscription</span>
-            <h3>$33.50 gross profit per pack.</h3>
-            <p>Revenue $59; landed COGS $25.50; gross margin 56.8%. After payment fees plus $10 shipping, contribution profit is about $22.17.</p>
-          </article>
-          <article class="note-card next">
+        <div class="revenue-layout">
+          <article class="note-card lead revenue-hero">
             <span class="note-label">Key Read</span>
             <h3>$69/$59 works, but monthly free shipping squeezes subscription margin.</h3>
             <p>Best structure: free shaker on the first subscription order, then push 2-pack and 3-pack bundles to protect margin.</p>
           </article>
-          <article class="note-card">
-            <span class="note-label">Base Forecast</span>
-            <h3>Excluding subscription rebills.</h3>
-            <p>Month 1: 250 orders and $16.4k revenue. Month 3: 1,000 orders and $65.5k revenue. Month 5: 4,000 orders and $262k revenue.</p>
+
+          <div class="unit-grid">
+            <article class="unit-card">
+              <span class="note-label">One-Time Purchase</span>
+              <h3>$41.99 contribution</h3>
+              <div class="metric-list">
+                <p><span>Revenue</span><strong>$69.00</strong></p>
+                <p><span>Landed COGS</span><strong>$25.50</strong></p>
+                <p><span>Gross profit</span><strong>$43.50</strong></p>
+                <p><span>Gross margin</span><strong>63.0%</strong></p>
+                <p><span>Payment fees</span><strong>~$1.51</strong></p>
+                <p><span>Before shipping, ads, overhead</span><strong>$41.99</strong></p>
+              </div>
+            </article>
+            <article class="unit-card">
+              <span class="note-label">Subscription Rebill</span>
+              <h3>$22.17 contribution</h3>
+              <div class="metric-list">
+                <p><span>Revenue</span><strong>$59.00</strong></p>
+                <p><span>Landed COGS</span><strong>$25.50</strong></p>
+                <p><span>Gross profit</span><strong>$33.50</strong></p>
+                <p><span>Gross margin</span><strong>56.8%</strong></p>
+                <p><span>Payment fees</span><strong>~$1.33</strong></p>
+                <p><span>Shipping if brand pays</span><strong>~$10.00</strong></p>
+                <p><span>After fees + shipping</span><strong>$22.17</strong></p>
+              </div>
+            </article>
+          </div>
+
+          <article class="cost-card">
+            <span class="note-label">Cost Stack</span>
+            <h3>30 serves per pack; base landed COGS is $0.85/serve.</h3>
+            <div class="cost-stack">
+              <p><strong>$21-$30</strong><span>COGS validation range at $0.70-$1.00 per serve.</span></p>
+              <p><strong>$25.50</strong><span>Base landed COGS per pack used in the model.</span></p>
+              <p><strong>$1.33-$1.51</strong><span>Approx payment fees depending on checkout type.</span></p>
+              <p><strong>$10</strong><span>Monthly shipping assumption when the brand pays on subscription rebills.</span></p>
+            </div>
+            <p class="card-footnote">Ads, fulfilment variation and overhead sit below these contribution lines, so CAC discipline and bundle mix decide how much profit survives at scale.</p>
           </article>
-          <article class="note-card">
-            <span class="note-label">Month 5 Read</span>
-            <h3>$160k base gross profit.</h3>
-            <p>After shipping, fees and ads, before overhead, Month 5 lands around $60k in the base forecast.</p>
-          </article>
-          <article class="note-card">
-            <span class="note-label">Source Model</span>
-            <h3>Saved in Obsidian.</h3>
-            <p>~/Documents/Claw-Notes/4. Claw Notes/7. Projects/3. Matcha Vera/26.04.26 Matcha Vera Revenue Pricing COGS Gross Margin Model.md</p>
+
+          <section class="scenario-card" aria-labelledby="one-time-scenarios">
+            <div class="scenario-heading">
+              <span class="note-label">Scenarios A</span>
+              <h3 id="one-time-scenarios">One-time orders using $41.99 contribution before shipping, ads and overhead.</h3>
+            </div>
+            <div class="scenario-rows">
+              <div class="scenario-row"><strong>250 orders</strong><span>Revenue $17,250</span><span>Gross profit $10,875</span><span>Contribution ~$10,498</span></div>
+              <div class="scenario-row"><strong>500 orders</strong><span>Revenue $34,500</span><span>Gross profit $21,750</span><span>Contribution ~$20,995</span></div>
+              <div class="scenario-row"><strong>1,000 orders</strong><span>Revenue $69,000</span><span>Gross profit $43,500</span><span>Contribution ~$41,990</span></div>
+              <div class="scenario-row"><strong>4,000 orders</strong><span>Revenue $276,000</span><span>Gross profit $174,000</span><span>Contribution ~$167,960</span></div>
+            </div>
+          </section>
+
+          <section class="scenario-card" aria-labelledby="subscriber-scenarios">
+            <div class="scenario-heading">
+              <span class="note-label">Scenarios B</span>
+              <h3 id="subscriber-scenarios">Subscriber monthly rebills using $22.17 contribution after payment fees + shipping.</h3>
+            </div>
+            <div class="scenario-rows">
+              <div class="scenario-row"><strong>250 subscribers</strong><span>Revenue $14,750</span><span>Gross profit $8,375</span><span>Contribution ~$5,543</span></div>
+              <div class="scenario-row"><strong>500 subscribers</strong><span>Revenue $29,500</span><span>Gross profit $16,750</span><span>Contribution ~$11,085</span></div>
+              <div class="scenario-row"><strong>1,000 subscribers</strong><span>Revenue $59,000</span><span>Gross profit $33,500</span><span>Contribution ~$22,170</span></div>
+              <div class="scenario-row"><strong>4,000 subscribers</strong><span>Revenue $236,000</span><span>Gross profit $134,000</span><span>Contribution ~$88,680</span></div>
+            </div>
+          </section>
+
+          <article class="forecast-card">
+            <span class="note-label">Scenarios C</span>
+            <h3>Existing base forecast excluding subscription rebills.</h3>
+            <div class="forecast-steps">
+              <p><strong>Month 1</strong><span>250 orders -> $16.4k revenue.</span></p>
+              <p><strong>Month 3</strong><span>1,000 orders -> $65.5k revenue.</span></p>
+              <p><strong>Month 5</strong><span>4,000 orders -> $262k revenue.</span></p>
+            </div>
+            <p class="card-footnote">Month 5 base gross profit is $160k. After shipping, fees and ads, before overhead, Month 5 lands around $60k.</p>
           </article>
         </div>
       </section>
