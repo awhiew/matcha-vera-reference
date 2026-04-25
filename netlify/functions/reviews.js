@@ -61,7 +61,19 @@ function normalizeReviewMap(value, updatedAt = new Date().toISOString()) {
   );
 }
 
+function apiBlobUrl(siteID, key = reviewKey) {
+  return `https://api.netlify.com/api/v1/blobs/${siteID}/site:${storeName}/${key}`;
+}
+
 async function getReviewStore(event) {
+  if (process.env.REVIEW_BLOBS_SITE_ID && process.env.REVIEW_BLOBS_TOKEN) {
+    return {
+      mode: "api",
+      siteID: process.env.REVIEW_BLOBS_SITE_ID,
+      token: process.env.REVIEW_BLOBS_TOKEN
+    };
+  }
+
   const { connectLambda, getStore } = await import("@netlify/blobs");
   if (event && event.blobs) {
     connectLambda(event);
@@ -70,7 +82,21 @@ async function getReviewStore(event) {
 }
 
 async function readReviewDocument(store) {
-  const saved = await store.get(reviewKey, { type: "json" });
+  let saved = null;
+
+  if (store.mode === "api") {
+    const response = await fetch(apiBlobUrl(store.siteID), {
+      headers: { Authorization: `Bearer ${store.token}` },
+      cache: "no-store"
+    });
+    if (response.status !== 404) {
+      if (!response.ok) throw new Error(`Netlify Blobs read failed: ${response.status}`);
+      saved = await response.json();
+    }
+  } else {
+    saved = await store.get(reviewKey, { type: "json" });
+  }
+
   if (!saved || typeof saved !== "object") {
     return { id: randomUUID(), reviews: {}, updatedAt: null };
   }
@@ -83,6 +109,19 @@ async function readReviewDocument(store) {
 }
 
 async function writeReviewDocument(store, document) {
+  if (store.mode === "api") {
+    const response = await fetch(apiBlobUrl(store.siteID), {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${store.token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(document)
+    });
+    if (!response.ok) throw new Error(`Netlify Blobs write failed: ${response.status}`);
+    return;
+  }
+
   if (typeof store.setJSON === "function") {
     await store.setJSON(reviewKey, document);
     return;
