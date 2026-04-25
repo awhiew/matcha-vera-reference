@@ -191,9 +191,9 @@ a {
 
 .review-toolbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: 8px 12px;
+  gap: 8px;
   min-width: 0;
   margin: 0 0 18px;
   padding: 10px;
@@ -209,14 +209,12 @@ a {
   min-width: 0;
 }
 
-.filter-primary,
-.filter-secondary {
+.filter-primary {
   flex-wrap: nowrap;
 }
 
 .toolbar-actions {
-  justify-self: end;
-  grid-row: 1 / span 2;
+  justify-self: start;
   flex-wrap: nowrap;
 }
 
@@ -736,21 +734,20 @@ a {
   }
 
   .filter-primary {
-    gap: 5px;
+    gap: 4px;
   }
 
   .filter-primary .toolbar-label {
-    font-size: 10px;
-    letter-spacing: 0.08em;
+    display: none;
+  }
+
+  .filter-primary .tool-button {
+    padding-inline: 7px;
   }
 
   .star-filter {
-    padding-inline: 6px;
-    font-size: 10.5px;
-  }
-
-  .filter-secondary .tool-button {
-    flex: 0 1 auto;
+    padding-inline: 5px;
+    font-size: 10px;
   }
 
   .toolbar-actions {
