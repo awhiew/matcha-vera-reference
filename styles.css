@@ -278,6 +278,13 @@ a {
   font-weight: 800;
 }
 
+.cloud-status {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .export-button {
   background: var(--night);
   color: #fffaf2;
@@ -749,6 +756,7 @@ a {
   .toolbar-actions {
     grid-row: auto;
     justify-self: stretch;
+    flex-wrap: wrap;
     gap: 6px;
   }
 
@@ -769,6 +777,11 @@ a {
 
   .review-summary {
     font-size: 11px;
+  }
+
+  .cloud-status {
+    flex: 1 0 100%;
+    font-size: 10.5px;
   }
 
   .scenario-row {

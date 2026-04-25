@@ -89,6 +89,9 @@ const imageFiles = [
 
 const tabOrder = ["web", "notes", "revenue"];
 const reviewStorageKey = "matchaVeraReview:v1";
+const cloudReviewsEndpoint = window.MATCHA_REVIEW_API || "https://matcha-vera-review-api.netlify.app/.netlify/functions/reviews";
+const cloudSaveDelay = 500;
+const maxReviewNotesLength = 5000;
 const reviewFilters = {
   all: () => true,
   unrated: (image) => getReview(image.file).rating === 0,
@@ -221,6 +224,7 @@ const filterButtons = [...document.querySelectorAll("[data-filter]")];
 const reviewSort = document.querySelector("#review-sort");
 const reviewSummary = document.querySelector("#review-summary");
 const exportReview = document.querySelector("#export-review");
+const cloudStatus = document.querySelector("#cloud-status");
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = lightbox.querySelector("img");
 const lightboxCaption = lightbox.querySelector(".lightbox-caption");
@@ -230,13 +234,40 @@ let activeTab = "web";
 let activeFilter = "all";
 let activeSort = "original";
 let reviewState = loadReviewState();
+let cloudSaveTimer = 0;
+const pendingCloudReviews = new Map();
+let cloudAvailable = Boolean(cloudReviewsEndpoint);
 let touchStartX = 0;
 let touchStartY = 0;
+
+function normalizeReviewEntry(entry) {
+  const source = entry && typeof entry === "object" ? entry : {};
+  const rating = Number(source.rating);
+  const notes = typeof source.notes === "string" ? source.notes.slice(0, maxReviewNotesLength) : "";
+  const updatedAt = typeof source.updatedAt === "string" && !Number.isNaN(Date.parse(source.updatedAt))
+    ? source.updatedAt
+    : "";
+
+  return {
+    rating: Math.max(0, Math.min(5, Number.isFinite(rating) ? Math.round(rating) : 0)),
+    notes,
+    updatedAt
+  };
+}
+
+function normalizeReviewState(input) {
+  const source = input && typeof input === "object" && !Array.isArray(input) ? input : {};
+  return Object.fromEntries(
+    Object.entries(source)
+      .filter(([file]) => imageFiles.includes(file))
+      .map(([file, review]) => [file, normalizeReviewEntry(review)])
+  );
+}
 
 function loadReviewState() {
   try {
     const saved = JSON.parse(localStorage.getItem(reviewStorageKey) || "{}");
-    return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+    return normalizeReviewState(saved);
   } catch (error) {
     return {};
   }
@@ -254,22 +285,125 @@ function getReview(file) {
   const saved = reviewState[file] || {};
   return {
     rating: Number.isInteger(saved.rating) ? saved.rating : 0,
-    notes: typeof saved.notes === "string" ? saved.notes : ""
+    notes: typeof saved.notes === "string" ? saved.notes : "",
+    updatedAt: typeof saved.updatedAt === "string" ? saved.updatedAt : ""
   };
 }
 
-function setReview(file, updates) {
+function setCloudStatus(message) {
+  if (!cloudStatus) return;
+  cloudStatus.textContent = message;
+}
+
+function mergeReviewState(nextReviews) {
+  const cloudReviews = normalizeReviewState(nextReviews);
+  const merged = { ...reviewState };
+
+  Object.entries(cloudReviews).forEach(([file, cloudReview]) => {
+    const localReview = normalizeReviewEntry(merged[file]);
+    const localTime = localReview.updatedAt ? Date.parse(localReview.updatedAt) : 0;
+    const cloudTime = cloudReview.updatedAt ? Date.parse(cloudReview.updatedAt) : 0;
+
+    if (!merged[file] || cloudTime >= localTime) {
+      merged[file] = cloudReview;
+    }
+  });
+
+  reviewState = merged;
+  saveReviewState();
+}
+
+async function fetchCloudReviews() {
+  if (!cloudReviewsEndpoint) {
+    setCloudStatus("Offline/local only");
+    return;
+  }
+
+  setCloudStatus("Syncing...");
+
+  try {
+    const response = await fetch(cloudReviewsEndpoint, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+
+    if (!response.ok) throw new Error(`Cloud GET failed: ${response.status}`);
+
+    const payload = await response.json();
+    mergeReviewState(payload.reviews || {});
+    renderImages();
+    cloudAvailable = true;
+    setCloudStatus("Cloud synced");
+  } catch (error) {
+    cloudAvailable = false;
+    setCloudStatus("Cloud unavailable");
+  }
+}
+
+function queueCloudSave(file) {
+  if (!cloudReviewsEndpoint) {
+    setCloudStatus("Offline/local only");
+    return;
+  }
+
+  pendingCloudReviews.set(file, { file, ...getReview(file) });
+  setCloudStatus(cloudAvailable ? "Saving..." : "Cloud unavailable");
+  window.clearTimeout(cloudSaveTimer);
+  cloudSaveTimer = window.setTimeout(savePendingCloudReview, cloudSaveDelay);
+}
+
+async function savePendingCloudReview() {
+  if (!pendingCloudReviews.size || !cloudReviewsEndpoint) return;
+  const reviews = [...pendingCloudReviews.values()];
+  pendingCloudReviews.clear();
+
+  try {
+    let payload = null;
+
+    for (const review of reviews) {
+      const response = await fetch(cloudReviewsEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          file: review.file,
+          rating: review.rating,
+          notes: review.notes
+        })
+      });
+
+      if (!response.ok) throw new Error(`Cloud POST failed: ${response.status}`);
+      payload = await response.json();
+    }
+
+    mergeReviewState((payload && payload.reviews) || {});
+    renderImages();
+    cloudAvailable = true;
+    setCloudStatus("Cloud saved");
+  } catch (error) {
+    reviews.forEach((review) => pendingCloudReviews.set(review.file, review));
+    cloudAvailable = false;
+    setCloudStatus("Cloud unavailable");
+  }
+}
+
+function setReview(file, updates, options = {}) {
   const next = { ...getReview(file), ...updates };
   reviewState[file] = {
     rating: Math.max(0, Math.min(5, Number(next.rating) || 0)),
-    notes: next.notes || ""
+    notes: String(next.notes || "").slice(0, maxReviewNotesLength),
+    updatedAt: new Date().toISOString()
   };
   saveReviewState();
   updateReviewSummary(getVisibleImages());
+  if (options.cloud !== false) queueCloudSave(file);
 }
 
 function clearReview(file) {
-  delete reviewState[file];
+  setReview(file, { rating: 0, notes: "" });
   saveReviewState();
   renderImages();
 }
@@ -520,3 +654,4 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderImages();
+fetchCloudReviews();
