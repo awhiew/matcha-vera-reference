@@ -189,6 +189,84 @@ a {
   gap: 22px;
 }
 
+.review-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 14px;
+  background: rgba(255, 253, 248, 0.76);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 34px rgba(29, 31, 26, 0.07);
+}
+
+.toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.toolbar-label {
+  color: var(--deep);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tool-button,
+.export-button,
+.download-link,
+.clear-review,
+.review-select {
+  min-height: 34px;
+  border: 1px solid rgba(23, 22, 20, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.84);
+  color: #514c45;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.tool-button,
+.export-button,
+.download-link,
+.clear-review {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.tool-button.active {
+  background: var(--deep);
+  color: #fffaf2;
+  border-color: var(--deep);
+}
+
+.review-select {
+  max-width: 100%;
+  padding: 0 32px 0 12px;
+}
+
+.review-summary {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.export-button {
+  margin-left: auto;
+  background: var(--night);
+  color: #fffaf2;
+  border-color: var(--night);
+}
+
 .reference-item {
   display: grid;
   min-width: 0;
@@ -240,6 +318,88 @@ a {
   color: var(--deep);
 }
 
+.card-review {
+  display: grid;
+  min-width: 0;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.download-link {
+  background: var(--deep);
+  color: #fffaf2;
+  border-color: var(--deep);
+}
+
+.clear-review {
+  background: transparent;
+}
+
+.clear-review:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.rating-control {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rating-control legend,
+.notes-label {
+  color: var(--deep);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.star-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.star-button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(32, 55, 45, 0.24);
+  border-radius: 999px;
+  background: #fffaf2;
+  color: var(--deep);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.review-notes {
+  width: 100%;
+  min-width: 0;
+  resize: vertical;
+  padding: 11px 12px;
+  background: #fffaf2;
+  border: 1px solid rgba(23, 22, 20, 0.18);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.45;
+}
+
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -283,6 +443,10 @@ a {
 }
 
 .note-card.lead {
+  grid-column: 1 / -1;
+}
+
+.revenue-grid .note-card.next {
   grid-column: 1 / -1;
 }
 
@@ -339,7 +503,7 @@ a {
 
   .tab-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
     overflow-x: visible;
     margin-inline: 0;
@@ -366,6 +530,23 @@ a {
 
   .notes-grid {
     grid-template-columns: 1fr;
+  }
+
+  .review-toolbar,
+  .toolbar-group,
+  .export-button,
+  .review-select {
+    width: 100%;
+  }
+
+  .tool-button {
+    flex: 1 1 calc(50% - 7px);
+    min-width: 0;
+    padding-inline: 8px;
+  }
+
+  .export-button {
+    margin-left: 0;
   }
 
 }

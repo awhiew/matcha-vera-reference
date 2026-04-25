@@ -15,6 +15,7 @@
       <nav class="tab-list" aria-label="Reference tabs">
         <button class="tab-button active" type="button" data-tab="web" aria-selected="true">Art Board</button>
         <button class="tab-button" type="button" data-tab="notes" aria-selected="false">Market Research</button>
+        <button class="tab-button" type="button" data-tab="revenue" aria-selected="false">Revenue / Margins</button>
       </nav>
     </header>
 
@@ -29,6 +30,28 @@
           <p class="eyebrow">Tab 1</p>
           <h2>Art Board</h2>
           <p>All website, product, social and logo boards in one ordered vertical scroll feed. Each image is shown uncropped for screenshot review.</p>
+        </div>
+        <div class="review-toolbar" aria-label="Art board review tools">
+          <div class="toolbar-group">
+            <span class="toolbar-label">Filter</span>
+            <button class="tool-button active" type="button" data-filter="all">All</button>
+            <button class="tool-button" type="button" data-filter="unrated">Unrated</button>
+            <button class="tool-button" type="button" data-filter="rated">Rated</button>
+            <button class="tool-button" type="button" data-filter="five">5 stars</button>
+            <button class="tool-button" type="button" data-filter="fourPlus">4+ stars</button>
+            <button class="tool-button" type="button" data-filter="threePlus">3+ stars</button>
+            <button class="tool-button" type="button" data-filter="notes">Has notes</button>
+          </div>
+          <div class="toolbar-group">
+            <label class="toolbar-label" for="review-sort">Sort</label>
+            <select id="review-sort" class="review-select">
+              <option value="original">Original order</option>
+              <option value="highest">Highest rated</option>
+              <option value="lowest">Lowest rated</option>
+            </select>
+          </div>
+          <div id="review-summary" class="review-summary" aria-live="polite"></div>
+          <button id="export-review" class="export-button" type="button">Export Review</button>
         </div>
         <div id="web-feed" class="reference-feed" aria-live="polite"></div>
       </section>
@@ -104,6 +127,56 @@
             <span class="note-label">Next Decisions</span>
             <h3>Choose 2-3 visual lanes.</h3>
             <p>Lock the shortlist around premium beauty/skincare, Japanese botanical premium and social/active launch creative. Then prototype homepage hero, PDP proof section, box/sachet system and paid social concepts.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="panel-revenue" class="tab-panel" data-panel="revenue" aria-label="Revenue and Margins">
+        <div class="panel-heading">
+          <p class="eyebrow">Tab 3</p>
+          <h2>Revenue / Margins</h2>
+          <p>Pricing, landed COGS, gross margin and launch forecast notes for checking whether the Matcha Vera model holds before committing to acquisition spend.</p>
+        </div>
+        <div class="notes-grid revenue-grid">
+          <article class="note-card lead">
+            <span class="note-label">Purpose</span>
+            <h3>Revenue targets, pricing maths and unit economics.</h3>
+            <p>Use this tab to review subscription maths, COGS/landed cost, gross margin, fulfilment/shipping, ad spend/CAC, break-even, P&amp;L forecasts and wholesale vs DTC economics.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Pack + Pricing</span>
+            <h3>30 serves at $69 one-time or $59 subscription.</h3>
+            <p>Base landed COGS is $0.85 per serve, or $25.50 per pack. Validation range is $0.70-$1.00 per serve.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">One-Time Purchase</span>
+            <h3>$43.50 gross profit per pack.</h3>
+            <p>Revenue $69; landed COGS $25.50; gross margin 63.0%. After payment fees, contribution profit is about $41.99 before shipping, ads and overhead.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Subscription</span>
+            <h3>$33.50 gross profit per pack.</h3>
+            <p>Revenue $59; landed COGS $25.50; gross margin 56.8%. After payment fees plus $10 shipping, contribution profit is about $22.17.</p>
+          </article>
+          <article class="note-card next">
+            <span class="note-label">Key Read</span>
+            <h3>$69/$59 works, but monthly free shipping squeezes subscription margin.</h3>
+            <p>Best structure: free shaker on the first subscription order, then push 2-pack and 3-pack bundles to protect margin.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Base Forecast</span>
+            <h3>Excluding subscription rebills.</h3>
+            <p>Month 1: 250 orders and $16.4k revenue. Month 3: 1,000 orders and $65.5k revenue. Month 5: 4,000 orders and $262k revenue.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Month 5 Read</span>
+            <h3>$160k base gross profit.</h3>
+            <p>After shipping, fees and ads, before overhead, Month 5 lands around $60k in the base forecast.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Source Model</span>
+            <h3>Saved in Obsidian.</h3>
+            <p>~/Documents/Claw-Notes/4. Claw Notes/7. Projects/3. Matcha Vera/26.04.26 Matcha Vera Revenue Pricing COGS Gross Margin Model.md</p>
           </article>
         </div>
       </section>

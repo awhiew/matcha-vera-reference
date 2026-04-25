@@ -18,9 +18,6 @@
 /Users/andrewhiew/.openclaw/media/tool-image-generation/big-sweep/matchavera-big-sweep-08-high-luxury-skincare.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/big-sweep/matchavera-big-sweep-09-vibrant-functional-fun.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/big-sweep/matchavera-big-sweep-10-japanese-botanical-premium.png
-/Users/andrewhiew/.openclaw/media/tool-image-generation/matcha-vera-gpt-image-2-proof.png
-/Users/andrewhiew/.openclaw/media/tool-image-generation/matcha-vera-openai-colour-schemes.png
-/Users/andrewhiew/.openclaw/media/tool-image-generation/matcha-vera-openai-logo-options.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matcha-vera-openai-website-mock.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-ad-refstyle-01-glow-focus.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-ad-refstyle-02-beauty-energy.png
@@ -53,7 +50,6 @@
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-originallogo-site-03-clean-science.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-originallogo-site-04-social-dtc.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-pastel-box-sachets-new-logo.png
-/Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-pastel-new-logo-board.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-pastel-website-new-logo.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-site-style-01-beauty-clinical.png
 /Users/andrewhiew/.openclaw/media/tool-image-generation/matchavera-site-style-02-luxury-ritual-refill.png

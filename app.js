@@ -19,9 +19,6 @@ const imageFiles = [
   "matchavera-big-sweep-08-high-luxury-skincare.png",
   "matchavera-big-sweep-09-vibrant-functional-fun.png",
   "matchavera-big-sweep-10-japanese-botanical-premium.png",
-  "matcha-vera-gpt-image-2-proof.png",
-  "matcha-vera-openai-colour-schemes.png",
-  "matcha-vera-openai-logo-options.png",
   "matcha-vera-openai-website-mock.png",
   "matchavera-ad-refstyle-01-glow-focus.png",
   "matchavera-ad-refstyle-02-beauty-energy.png",
@@ -54,7 +51,6 @@ const imageFiles = [
   "matchavera-originallogo-site-03-clean-science.png",
   "matchavera-originallogo-site-04-social-dtc.png",
   "matchavera-pastel-box-sachets-new-logo.png",
-  "matchavera-pastel-new-logo-board.png",
   "matchavera-pastel-website-new-logo.png",
   "matchavera-site-style-01-beauty-clinical.png",
   "matchavera-site-style-02-luxury-ritual-refill.png",
@@ -91,7 +87,17 @@ const imageFiles = [
   "matchavera-premium-logo-style-10-cosmetic-emblem.png"
 ];
 
-const tabOrder = ["web", "notes"];
+const tabOrder = ["web", "notes", "revenue"];
+const reviewStorageKey = "matchaVeraReview:v1";
+const reviewFilters = {
+  all: () => true,
+  unrated: (image) => getReview(image.file).rating === 0,
+  rated: (image) => getReview(image.file).rating > 0,
+  five: (image) => getReview(image.file).rating === 5,
+  fourPlus: (image) => getReview(image.file).rating >= 4,
+  threePlus: (image) => getReview(image.file).rating >= 3,
+  notes: (image) => getReview(image.file).notes.trim().length > 0
+};
 
 const priorityFiles = [
   "matchavera-big-sweep-08-high-luxury-skincare.png",
@@ -211,14 +217,157 @@ const tabButtons = [...document.querySelectorAll(".tab-button")];
 const tabPanels = [...document.querySelectorAll(".tab-panel")];
 const appShell = document.querySelector(".app-shell");
 const webFeed = document.querySelector("#web-feed");
+const filterButtons = [...document.querySelectorAll("[data-filter]")];
+const reviewSort = document.querySelector("#review-sort");
+const reviewSummary = document.querySelector("#review-summary");
+const exportReview = document.querySelector("#export-review");
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = lightbox.querySelector("img");
 const lightboxCaption = lightbox.querySelector(".lightbox-caption");
 const lightboxClose = lightbox.querySelector(".lightbox-close");
 
 let activeTab = "web";
+let activeFilter = "all";
+let activeSort = "original";
+let reviewState = loadReviewState();
 let touchStartX = 0;
 let touchStartY = 0;
+
+function loadReviewState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(reviewStorageKey) || "{}");
+    return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveReviewState() {
+  try {
+    localStorage.setItem(reviewStorageKey, JSON.stringify(reviewState));
+  } catch (error) {
+    // Keep the UI usable even if storage is blocked.
+  }
+}
+
+function getReview(file) {
+  const saved = reviewState[file] || {};
+  return {
+    rating: Number.isInteger(saved.rating) ? saved.rating : 0,
+    notes: typeof saved.notes === "string" ? saved.notes : ""
+  };
+}
+
+function setReview(file, updates) {
+  const next = { ...getReview(file), ...updates };
+  reviewState[file] = {
+    rating: Math.max(0, Math.min(5, Number(next.rating) || 0)),
+    notes: next.notes || ""
+  };
+  saveReviewState();
+  updateReviewSummary(getVisibleImages());
+}
+
+function clearReview(file) {
+  delete reviewState[file];
+  saveReviewState();
+  renderImages();
+}
+
+function getVisibleImages() {
+  const filter = reviewFilters[activeFilter] || reviewFilters.all;
+  const visible = orderedImages.filter(filter);
+
+  if (activeSort === "highest") {
+    return [...visible].sort((a, b) => getReview(b.file).rating - getReview(a.file).rating || orderedImages.indexOf(a) - orderedImages.indexOf(b));
+  }
+
+  if (activeSort === "lowest") {
+    return [...visible].sort((a, b) => getReview(a.file).rating - getReview(b.file).rating || orderedImages.indexOf(a) - orderedImages.indexOf(b));
+  }
+
+  return visible;
+}
+
+function updateReviewSummary(visibleImages) {
+  const rated = orderedImages.filter((image) => getReview(image.file).rating > 0);
+  const average = rated.length
+    ? (rated.reduce((sum, image) => sum + getReview(image.file).rating, 0) / rated.length).toFixed(1)
+    : "0.0";
+
+  reviewSummary.textContent = `${visibleImages.length} visible / ${rated.length} rated / ${average} avg`;
+}
+
+function createRatingControl(image) {
+  const review = getReview(image.file);
+  const fieldset = document.createElement("fieldset");
+  fieldset.className = "rating-control";
+
+  const legend = document.createElement("legend");
+  legend.textContent = "Rating";
+
+  const stars = document.createElement("div");
+  stars.className = "star-buttons";
+
+  for (let rating = 1; rating <= 5; rating += 1) {
+    const button = document.createElement("button");
+    button.className = "star-button";
+    button.type = "button";
+    button.textContent = rating <= review.rating ? "★" : "☆";
+    button.setAttribute("aria-label", `${rating} star${rating === 1 ? "" : "s"} for ${image.title}`);
+    button.setAttribute("aria-pressed", String(rating === review.rating));
+    button.addEventListener("click", () => {
+      setReview(image.file, { rating });
+      renderImages();
+    });
+    stars.append(button);
+  }
+
+  fieldset.append(legend, stars);
+  return fieldset;
+}
+
+function createReviewPanel(image) {
+  const review = getReview(image.file);
+  const panel = document.createElement("div");
+  panel.className = "card-review";
+
+  const actions = document.createElement("div");
+  actions.className = "card-actions";
+
+  const download = document.createElement("a");
+  download.className = "download-link";
+  download.href = image.src;
+  download.download = image.file;
+  download.textContent = "Download PNG";
+
+  const clear = document.createElement("button");
+  clear.className = "clear-review";
+  clear.type = "button";
+  clear.textContent = "Clear";
+  clear.disabled = review.rating === 0 && !review.notes;
+  clear.addEventListener("click", () => clearReview(image.file));
+
+  actions.append(download, clear);
+
+  const label = document.createElement("label");
+  label.className = "notes-label";
+  label.textContent = "Reviewer notes";
+
+  const textarea = document.createElement("textarea");
+  textarea.className = "review-notes";
+  textarea.rows = 3;
+  textarea.value = review.notes;
+  textarea.placeholder = "Add notes for Andrew...";
+  textarea.setAttribute("aria-label", `Reviewer notes for ${image.title}`);
+  textarea.addEventListener("input", () => {
+    setReview(image.file, { notes: textarea.value });
+    clear.disabled = getReview(image.file).rating === 0 && !textarea.value;
+  });
+
+  panel.append(actions, createRatingControl(image), label, textarea);
+  return panel;
+}
 
 function createReferenceItem(image, index) {
   const article = document.createElement("article");
@@ -249,14 +398,16 @@ function createReferenceItem(image, index) {
   description.textContent = image.take;
 
   imageButton.append(img);
-  body.append(meta, title, description);
+  body.append(meta, title, description, createReviewPanel(image));
   article.append(imageButton, body);
   imageButton.addEventListener("click", () => openLightbox(image));
   return article;
 }
 
 function renderImages() {
-  webFeed.replaceChildren(...orderedImages.map(createReferenceItem));
+  const visibleImages = getVisibleImages();
+  webFeed.replaceChildren(...visibleImages.map(createReferenceItem));
+  updateReviewSummary(visibleImages);
 }
 
 function setActiveTab(tab) {
@@ -292,9 +443,45 @@ function openLightbox(image) {
   }
 }
 
+function exportReviewData() {
+  const reviewed = orderedImages
+    .map((image) => ({ file: image.file, title: image.title, ...getReview(image.file) }))
+    .filter((item) => item.rating > 0 || item.notes.trim());
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    storageKey: reviewStorageKey,
+    totalImages: orderedImages.length,
+    reviewed
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `matcha-vera-review-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
 tabButtons.forEach((button) => {
   button.addEventListener("click", () => setActiveTab(button.dataset.tab));
 });
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+    filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+    renderImages();
+  });
+});
+
+reviewSort.addEventListener("change", () => {
+  activeSort = reviewSort.value;
+  renderImages();
+});
+
+exportReview.addEventListener("click", exportReviewData);
 
 appShell.addEventListener(
   "touchstart",
