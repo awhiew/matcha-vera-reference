@@ -339,7 +339,7 @@ function createReviewPanel(image) {
   download.className = "download-link";
   download.href = image.src;
   download.download = image.file;
-  download.textContent = "Download PNG";
+  download.textContent = "Download";
 
   const clear = document.createElement("button");
   clear.className = "clear-review";
