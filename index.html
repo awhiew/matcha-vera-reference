@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matcha Vera Reference Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand-mark" href="#top" aria-label="Matcha Vera reference viewer home">
+        <span>Matcha Vera</span>
+        <small>Reference viewer</small>
+      </a>
+      <nav class="tab-list" aria-label="Reference tabs">
+        <button class="tab-button active" type="button" data-tab="web" aria-selected="true">Website/Product Styles</button>
+        <button class="tab-button" type="button" data-tab="logos" aria-selected="false">Logos / Identity</button>
+        <button class="tab-button" type="button" data-tab="notes" aria-selected="false">Market Notes</button>
+      </nav>
+    </header>
+
+    <main id="top" class="app-shell">
+      <section class="intro">
+        <p class="eyebrow">Swipe or tap tabs</p>
+        <h1>Reference boards for choosing the Matcha Vera visual lane.</h1>
+      </section>
+
+      <section id="panel-web" class="tab-panel active" data-panel="web" aria-label="Website/Product Styles">
+        <div class="panel-heading">
+          <p class="eyebrow">Tab 1</p>
+          <h2>Website/Product Styles</h2>
+          <p>All non-logo boards in one ordered scroll feed. Each image is shown uncropped for screenshot review.</p>
+        </div>
+        <div id="web-feed" class="reference-feed" aria-live="polite"></div>
+        <section class="web-logo-section" aria-labelledby="web-logo-heading">
+          <div class="section-heading">
+            <p class="eyebrow">Identity addendum</p>
+            <h2 id="web-logo-heading">Logo / Identity Boards</h2>
+            <p>Logo-only and identity references collected here for end-to-end review after the website and product feed.</p>
+          </div>
+          <div id="web-logo-gallery" class="logo-gallery web-logo-gallery" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <section id="panel-logos" class="tab-panel" data-panel="logos" aria-label="Logos / Identity">
+        <div class="panel-heading">
+          <p class="eyebrow">Tab 2</p>
+          <h2>Logos / Identity</h2>
+          <p>Logo-only and identity boards for comparing marks, wordmarks, emblems and premium style cues.</p>
+        </div>
+        <div id="logo-gallery" class="logo-gallery" aria-live="polite"></div>
+      </section>
+
+      <section id="panel-notes" class="tab-panel" data-panel="notes" aria-label="Market Notes">
+        <div class="panel-heading">
+          <p class="eyebrow">Tab 3</p>
+          <h2>Market Notes</h2>
+          <p>Concise direction for turning the references into a brand decision.</p>
+        </div>
+        <div class="notes-grid">
+          <article class="note-card lead">
+            <span class="note-label">Product</span>
+            <h3>Daily Collagen Matcha: shake, sip, glow.</h3>
+            <p>Premium ingestible beauty supplement in 30 sachets. The frame is a modern beauty ritual with meaningful dosing, not a supplement-aisle powder.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Target Market</span>
+            <h3>Australian women 28-42.</h3>
+            <p>Primary buyer 30-40; secondary 25-29; tertiary 40-50. Beauty, fitness and wellness aware, social-media fluent, premium but modern. Avoid old-fashioned anti-aging cues.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Brand Opportunity</span>
+            <h3>Premium beauty plus matcha provenance.</h3>
+            <p>The category is samey: calm, pastel, earthy, clean-girl and slow ritual. White space is editorial beauty, specific matcha origin cues and faster social-native launch creative.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Formula Advantage</span>
+            <h3>Best-in-category active stack.</h3>
+            <p>Per 18g sachet: 10,000mg marine collagen, 3,000mg ceremonial matcha, 100mg L-theanine, 50mg hyaluronic acid, 50mg vitamin C, 100mcg biotin, acacia fibre, sunflower phospholipid, MCT, vanilla, monk fruit and sucralose.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Pricing + Offer</span>
+            <h3>Use premium anchoring.</h3>
+            <p>30 serves. Current stronger anchor: $69 one-time or $59 subscription with free shaker, free shipping and convenience. $64/$54 remains an alternative pending decision.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Competitor Map</span>
+            <h3>Benchmark against familiar players.</h3>
+            <p>Vida Glow and Dose & Co bring clinical beauty credibility. Par Olive is sage/cream and derm-led but sterile. Nutra Organics is affordable wholefood. Tropeaka is active/fun with lower collagen. Vital Proteins has 10g collagen but less beauty stack. Kroma is premium and expensive with less disclosure.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Content White Space</span>
+            <h3>Move faster than slow wellness.</h3>
+            <p>Use raw authenticity, humour, fitness memes, gym/pre-workout angles and fast-paced video. Keep slow ritual as one layer, not the whole content system.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Claims + Compliance</span>
+            <h3>Stay useful and safe.</h3>
+            <p>Safer language: supports skin hydration and elasticity, hair/skin/nails, collagen formation, calm focus and energy. Avoid anti-aging, reverses wrinkles, treats anxiety, cures brain fog or TGA-approved claims.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Sweetener Watchout</span>
+            <h3>Taste wins, but copy must adapt.</h3>
+            <p>Sucralose stays because taste matters. Do not claim no artificial sweeteners, all natural or naturally sweetened while it remains in the formula.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Copy / Taglines</span>
+            <h3>Beauty ritual, real dose.</h3>
+            <p>"The glow drink that looks like premium skincare." "Your morning ritual, upgraded." "No scoops. No mess. No excuses." "10,000mg marine collagen. Every. Single. Day." "Shake. Sip. Glow."</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Go-To-Market</span>
+            <h3>DTC first, sampling close behind.</h3>
+            <p>Shopify and Meta ads are the primary engine. Add subscription bolt-on, Panda/Astra venue sampling, micro-influencer seeding, affiliates, then wholesale as phase 2.</p>
+          </article>
+          <article class="note-card">
+            <span class="note-label">Influencer Targets</span>
+            <h3>Seed beauty, wellness and active creators.</h3>
+            <p>Initial examples: @joannafleming13, @lucyisdewy, @tyrrra, @carlysophia_, @annalisedalins_. Prioritise creators who can make ritual, gym bag and taste content feel native.</p>
+          </article>
+          <article class="note-card next">
+            <span class="note-label">Next Decisions</span>
+            <h3>Choose 2-3 visual lanes.</h3>
+            <p>Lock the shortlist around premium beauty/skincare, Japanese botanical premium and social/active launch creative. Then prototype homepage hero, PDP proof section, box/sachet system and paid social concepts.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="lightbox" aria-label="Image preview">
+      <button class="lightbox-close" type="button" aria-label="Close preview">Close</button>
+      <img alt="">
+      <div class="lightbox-caption"></div>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

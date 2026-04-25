@@ -1,0 +1,345 @@
+const imageFiles = [
+  "matchavera-big-sweep-v2-01-electric-lime-tech.png",
+  "matchavera-big-sweep-v2-02-soft-pink-beauty.png",
+  "matchavera-big-sweep-v2-03-bold-orange-sunrise.png",
+  "matchavera-big-sweep-v2-04-midnight-luxury.png",
+  "matchavera-big-sweep-v2-05-playful-pop-candy.png",
+  "matchavera-big-sweep-v2-06-minimal-black-white.png",
+  "matchavera-big-sweep-v2-07-earthy-organic-apothecary.png",
+  "matchavera-big-sweep-v2-08-blue-hydration-beauty.png",
+  "matchavera-big-sweep-v2-09-red-fashion-statement.png",
+  "matchavera-big-sweep-v2-10-purple-night-focus.png",
+  "matchavera-big-sweep-01-ingestible-beauty-clinical.png",
+  "matchavera-big-sweep-02-luxury-ritual-refill.png",
+  "matchavera-big-sweep-03-transparent-science-future.png",
+  "matchavera-big-sweep-04-matcha-cafe-lifestyle.png",
+  "matchavera-big-sweep-05-dewy-beauty-community.png",
+  "matchavera-big-sweep-06-punchy-social-dtc.png",
+  "matchavera-big-sweep-07-premium-active-wellness.png",
+  "matchavera-big-sweep-08-high-luxury-skincare.png",
+  "matchavera-big-sweep-09-vibrant-functional-fun.png",
+  "matchavera-big-sweep-10-japanese-botanical-premium.png",
+  "matcha-vera-gpt-image-2-proof.png",
+  "matcha-vera-openai-colour-schemes.png",
+  "matcha-vera-openai-logo-options.png",
+  "matcha-vera-openai-website-mock.png",
+  "matchavera-ad-refstyle-01-glow-focus.png",
+  "matchavera-ad-refstyle-02-beauty-energy.png",
+  "matchavera-ad-refstyle-03-ingredient-stack.png",
+  "matchavera-ad-refstyle-04-gym-beauty.png",
+  "matchavera-box-variations-01-premium-clean.png",
+  "matchavera-box-variations-03-luxury-ritual-retry.png",
+  "matchavera-box-variations-04-sachet-detail.png",
+  "matchavera-box-variations-05-box-structure-retry.png",
+  "matchavera-box-waterdrop-logo-01.png",
+  "matchavera-box-waterdrop-logo-02-options.png",
+  "matchavera-colourful-box-sachets.png",
+  "matchavera-colourful-website.png",
+  "matchavera-instagram-content-tile-system.png",
+  "matchavera-instagram-feed-clinical-beauty-grid.png",
+  "matchavera-newlogo-consistentbottle-01-beauty-clinical.png",
+  "matchavera-newlogo-consistentbottle-02-luxury-ritual.png",
+  "matchavera-newlogo-consistentbottle-03-social-dtc.png",
+  "matchavera-newlogo-largebottle-01-beauty-clinical.png",
+  "matchavera-newlogo-largebottle-02-luxury-ritual.png",
+  "matchavera-newlogo-largebottle-03-social-dtc.png",
+  "matchavera-newlogo-site-01-soft-beauty-clinical.png",
+  "matchavera-newlogo-site-02-luxury-ritual.png",
+  "matchavera-newlogo-site-03-clean-science.png",
+  "matchavera-newlogo-site-04-cafe-lifestyle.png",
+  "matchavera-newlogo-site-05-social-dtc.png",
+  "matchavera-newlogo-site-06-active-wellness.png",
+  "matchavera-originallogo-site-01-beauty-clinical.png",
+  "matchavera-originallogo-site-02-luxury-ritual.png",
+  "matchavera-originallogo-site-03-clean-science.png",
+  "matchavera-originallogo-site-04-social-dtc.png",
+  "matchavera-pastel-box-sachets-new-logo.png",
+  "matchavera-pastel-new-logo-board.png",
+  "matchavera-pastel-website-new-logo.png",
+  "matchavera-site-style-01-beauty-clinical.png",
+  "matchavera-site-style-02-luxury-ritual-refill.png",
+  "matchavera-site-style-03-traceable-science.png",
+  "matchavera-site-style-04-cafe-matcha-lifestyle.png",
+  "matchavera-site-style-05-punchy-social-dtc.png",
+  "matchavera-site-style-06-athletic-premium.png",
+  "matchavera-website-fitness-retry-editorial.png",
+  "matchavera-website-fitness-retry-premium-dtc.png",
+  "matchavera-website-variation-01-clinical-cream.png",
+  "matchavera-website-variation-02-bold-matcha.png",
+  "matchavera-website-variation-03-luxury-ritual.png",
+  "matchavera-website-vibrant-fitness-01.png",
+  "matchavera-website-vibrant-fitness-02.png",
+  "matchavera-premium-logo-style-v2-01-pearl-marine-beauty.png",
+  "matchavera-premium-logo-style-v2-02-founder-beauty-diary.png",
+  "matchavera-premium-logo-style-v2-03-prestige-pharmacy.png",
+  "matchavera-premium-logo-style-v2-04-italian-aperitivo-luxe.png",
+  "matchavera-premium-logo-style-v2-05-sculptural-minimal.png",
+  "matchavera-premium-logo-style-v2-06-soft-medical-aesthetic.png",
+  "matchavera-premium-logo-style-v2-07-old-money-tennis-club.png",
+  "matchavera-premium-logo-style-v2-08-glass-skin-korean-beauty.png",
+  "matchavera-premium-logo-style-v2-09-couture-botanical.png",
+  "matchavera-premium-logo-style-v2-10-mineral-spa-luxe.png",
+  "matchavera-premium-logo-style-01-modern-serif-beauty.png",
+  "matchavera-premium-logo-style-02-lowercase-rhode-minimal.png",
+  "matchavera-premium-logo-style-03-parisian-monogram.png",
+  "matchavera-premium-logo-style-04-clinical-dermal.png",
+  "matchavera-premium-logo-style-05-botanical-apothecary-luxe.png",
+  "matchavera-premium-logo-style-06-japanese-quiet-luxury.png",
+  "matchavera-premium-logo-style-07-editorial-fashion-beauty.png",
+  "matchavera-premium-logo-style-08-soft-script-beauty.png",
+  "matchavera-premium-logo-style-09-science-luxury-grid.png",
+  "matchavera-premium-logo-style-10-cosmetic-emblem.png"
+];
+
+const tabOrder = ["web", "logos", "notes"];
+
+const priorityFiles = [
+  "matchavera-big-sweep-08-high-luxury-skincare.png",
+  "matchavera-big-sweep-10-japanese-botanical-premium.png",
+  "matchavera-big-sweep-02-luxury-ritual-refill.png",
+  "matchavera-newlogo-site-02-luxury-ritual.png",
+  "matchavera-site-style-01-beauty-clinical.png",
+  "matchavera-site-style-02-luxury-ritual-refill.png",
+  "matchavera-pastel-website-new-logo.png",
+  "matchavera-box-variations-01-premium-clean.png",
+  "matchavera-pastel-box-sachets-new-logo.png",
+  "matchavera-instagram-content-tile-system.png",
+  "matchavera-ad-refstyle-02-beauty-energy.png",
+  "matchavera-ad-refstyle-04-gym-beauty.png"
+];
+
+const takesByFile = {
+  "matchavera-big-sweep-08-high-luxury-skincare.png": "Best territory anchor: makes the drink feel like premium skincare.",
+  "matchavera-big-sweep-10-japanese-botanical-premium.png": "Best provenance route: matcha, botanical calm and quiet luxury.",
+  "matchavera-big-sweep-02-luxury-ritual-refill.png": "Best retention story: ritual, refill and giftable packaging.",
+  "matchavera-big-sweep-07-premium-active-wellness.png": "Good social layer: Pilates, performance and glow routine.",
+  "matchavera-big-sweep-06-punchy-social-dtc.png": "Best for fast ads: useful for conversion, not master brand.",
+  "matchavera-big-sweep-04-matcha-cafe-lifestyle.png": "Warm and approachable, but too cafe-led to carry premium price perception alone.",
+  "matchavera-big-sweep-v2-05-playful-pop-candy.png": "Memorable, but risks cheapening the beauty and formula story.",
+  "matchavera-big-sweep-v2-07-earthy-organic-apothecary.png": "Clean wellness cues are familiar; use only if sharpened with a more ownable matcha point.",
+  "matchavera-site-style-01-beauty-clinical.png": "Strong web route: beauty-first with enough proof architecture.",
+  "matchavera-site-style-02-luxury-ritual-refill.png": "Best for habit and refill storytelling.",
+  "matchavera-site-style-03-traceable-science.png": "Useful proof route if softened with more beauty desire.",
+  "matchavera-site-style-04-cafe-matcha-lifestyle.png": "Approachable lifestyle reference, but keep it secondary to premium beauty.",
+  "matchavera-site-style-05-punchy-social-dtc.png": "Good for fast conversion tests and launch creative energy.",
+  "matchavera-site-style-06-athletic-premium.png": "Good active wellness bridge for gym bag and Pilates moments.",
+  "matchavera-ad-refstyle-02-beauty-energy.png": "Best social promise: quick beauty-energy cue.",
+  "matchavera-ad-refstyle-04-gym-beauty.png": "Best active angle: gym bag, Pilates and glow routine.",
+  "matchavera-ad-refstyle-03-ingredient-stack.png": "Best proof ad: formula value in a fast visual.",
+  "matchavera-box-variations-01-premium-clean.png": "Best packaging base: clean, premium and commercially usable.",
+  "matchavera-box-variations-03-luxury-ritual-retry.png": "Most ritual-led packaging reference.",
+  "matchavera-instagram-content-tile-system.png": "Best content system: repeatable tiles for launch cadence.",
+  "matchavera-instagram-feed-clinical-beauty-grid.png": "Polished grid reference; add warmer founder or routine content.",
+  "matchavera-premium-logo-style-v2-10-mineral-spa-luxe.png": "Best commercial premium: polished, beauty-coded and easy to imagine as a full system.",
+  "matchavera-premium-logo-style-06-japanese-quiet-luxury.png": "Most ownable: refined matcha cues without drifting into cafe territory.",
+  "matchavera-premium-logo-style-v2-05-sculptural-minimal.png": "Most luxury: strongest editorial shelf presence.",
+  "matchavera-premium-logo-style-v2-02-founder-beauty-diary.png": "Best for social: founder-led, intimate and easy to serialize.",
+  "matchavera-premium-logo-style-01-modern-serif-beauty.png": "Strong commercial identity: premium beauty with broad usability.",
+  "matchavera-premium-logo-style-03-parisian-monogram.png": "Luxury signal for gifting, embossing and shelf cues.",
+  "matchavera-premium-logo-style-v2-09-couture-botanical.png": "Distinct premium reference: dramatic, botanical and less samey.",
+  "matchavera-premium-logo-style-v2-03-prestige-pharmacy.png": "Credible, but colder than the desired beauty ritual.",
+  "matchavera-premium-logo-style-04-clinical-dermal.png": "Useful proof reference, not the lead feeling."
+};
+
+function titleCase(input) {
+  return input
+    .replace(/^matcha-vera-/, "")
+    .replace(/^matchavera-/, "")
+    .replace(/\.png$/, "")
+    .replace(/-/g, " ")
+    .replace(/\bv2\b/i, "V2")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function isLogoOnly(file) {
+  return (
+    file.includes("premium-logo-style") ||
+    file.includes("logo-options") ||
+    file.includes("pastel-new-logo-board") ||
+    file.includes("box-waterdrop-logo")
+  );
+}
+
+function getRole(file) {
+  if (isLogoOnly(file)) return "Logo / Identity";
+  if (file.includes("ad-refstyle")) return "Ad / Social";
+  if (file.includes("instagram")) return "Content";
+  if (file.includes("box") || file.includes("sachet") || file.includes("bottle")) return "Packaging / Product";
+  if (file.includes("website") || file.includes("site-")) return "Website";
+  if (file.includes("big-sweep")) return "Visual Territory";
+  if (file.includes("colour")) return "Colour System";
+  if (file.includes("proof")) return "Formula Proof";
+  return "Reference";
+}
+
+function getTake(file) {
+  if (takesByFile[file]) return takesByFile[file];
+  if (isLogoOnly(file)) return "Identity reference: compare for premium cues, distinctiveness, shelf use and flexibility across packs.";
+  if (file.includes("big-sweep")) return "Territory scan: use as context for choosing the core beauty, provenance or social lane.";
+  if (file.includes("website") || file.includes("site-")) return "Digital reference: evaluate for first-click desire, proof clarity and premium feel.";
+  if (file.includes("instagram") || file.includes("ad-refstyle")) return "Launch creative reference: useful for content rhythm, hooks and paid social tests.";
+  if (file.includes("box") || file.includes("sachet") || file.includes("bottle")) return "Product reference: compare packaging hierarchy, ritual cues and shelf presence.";
+  if (file.includes("colour")) return "Palette reference: use to keep the system premium without becoming generic wellness.";
+  if (file.includes("proof")) return "Proof reference: useful for explaining active dosing without turning the brand clinical.";
+  return "Reference board for comparing Matcha Vera's premium beauty ritual direction.";
+}
+
+function getSortScore(file) {
+  const priorityIndex = priorityFiles.indexOf(file);
+  if (priorityIndex !== -1) return priorityIndex;
+  if (file.includes("premium") || file.includes("luxury") || file.includes("luxe")) return 30;
+  if (file.includes("website") || file.includes("site-")) return 40;
+  if (file.includes("box") || file.includes("sachet") || file.includes("bottle")) return 50;
+  if (file.includes("instagram") || file.includes("ad-refstyle")) return 60;
+  if (file.includes("cafe") || file.includes("candy") || file.includes("pharmacy")) return 85;
+  return 70;
+}
+
+const images = imageFiles.map((file) => ({
+  file,
+  src: `assets/images/${file}`,
+  title: titleCase(file),
+  role: getRole(file),
+  take: getTake(file),
+  score: getSortScore(file)
+}));
+
+const webImages = images
+  .filter((image) => !isLogoOnly(image.file))
+  .sort((a, b) => a.score - b.score || imageFiles.indexOf(a.file) - imageFiles.indexOf(b.file));
+
+const logoImages = images
+  .filter((image) => isLogoOnly(image.file))
+  .sort((a, b) => a.score - b.score || imageFiles.indexOf(a.file) - imageFiles.indexOf(b.file));
+
+const tabButtons = [...document.querySelectorAll(".tab-button")];
+const tabPanels = [...document.querySelectorAll(".tab-panel")];
+const appShell = document.querySelector(".app-shell");
+const webFeed = document.querySelector("#web-feed");
+const webLogoGallery = document.querySelector("#web-logo-gallery");
+const logoGallery = document.querySelector("#logo-gallery");
+const lightbox = document.querySelector(".lightbox");
+const lightboxImage = lightbox.querySelector("img");
+const lightboxCaption = lightbox.querySelector(".lightbox-caption");
+const lightboxClose = lightbox.querySelector(".lightbox-close");
+
+let activeTab = "web";
+let touchStartX = 0;
+let touchStartY = 0;
+
+function createReferenceItem(image, index) {
+  const article = document.createElement("article");
+  article.className = "reference-item";
+
+  const imageButton = document.createElement("button");
+  imageButton.className = "reference-image-button";
+  imageButton.type = "button";
+  imageButton.setAttribute("aria-label", `Preview ${image.title}`);
+
+  const img = document.createElement("img");
+  img.src = image.src;
+  img.alt = image.title;
+  img.loading = index < 3 ? "eager" : "lazy";
+  img.decoding = "async";
+
+  const body = document.createElement("div");
+  body.className = "reference-body";
+
+  const meta = document.createElement("span");
+  meta.className = "item-meta";
+  meta.textContent = `${String(index + 1).padStart(2, "0")} / ${image.role}`;
+
+  const title = document.createElement("h3");
+  title.textContent = image.title;
+
+  const description = document.createElement("p");
+  description.textContent = image.take;
+
+  imageButton.append(img);
+  body.append(meta, title, description);
+  article.append(imageButton, body);
+  imageButton.addEventListener("click", () => openLightbox(image));
+  return article;
+}
+
+function renderImages() {
+  webFeed.replaceChildren(...webImages.map(createReferenceItem));
+  webLogoGallery.replaceChildren(...logoImages.map(createReferenceItem));
+  logoGallery.replaceChildren(...logoImages.map(createReferenceItem));
+}
+
+function setActiveTab(tab) {
+  if (!tabOrder.includes(tab)) return;
+  activeTab = tab;
+
+  tabButtons.forEach((button) => {
+    const isActive = button.dataset.tab === tab;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+
+  tabPanels.forEach((panel) => {
+    panel.classList.toggle("active", panel.dataset.panel === tab);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function shiftTab(direction) {
+  const currentIndex = tabOrder.indexOf(activeTab);
+  const nextIndex = Math.max(0, Math.min(tabOrder.length - 1, currentIndex + direction));
+  setActiveTab(tabOrder[nextIndex]);
+}
+
+function openLightbox(image) {
+  lightboxImage.src = image.src;
+  lightboxImage.alt = image.title;
+  lightboxCaption.textContent = `${image.title} - ${image.take}`;
+
+  if (typeof lightbox.showModal === "function") {
+    lightbox.showModal();
+  }
+}
+
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => setActiveTab(button.dataset.tab));
+});
+
+appShell.addEventListener(
+  "touchstart",
+  (event) => {
+    if (event.touches.length !== 1) return;
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+  },
+  { passive: true }
+);
+
+appShell.addEventListener(
+  "touchend",
+  (event) => {
+    if (!touchStartX || !event.changedTouches.length) return;
+    if (event.target.closest(".logo-gallery")) return;
+    const deltaX = event.changedTouches[0].clientX - touchStartX;
+    const deltaY = event.changedTouches[0].clientY - touchStartY;
+    touchStartX = 0;
+    touchStartY = 0;
+
+    if (Math.abs(deltaX) < 70 || Math.abs(deltaX) < Math.abs(deltaY) * 1.35) return;
+    shiftTab(deltaX < 0 ? 1 : -1);
+  },
+  { passive: true }
+);
+
+lightboxClose.addEventListener("click", () => lightbox.close());
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) lightbox.close();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && lightbox.open) lightbox.close();
+  if (event.key === "ArrowRight") shiftTab(1);
+  if (event.key === "ArrowLeft") shiftTab(-1);
+});
+
+renderImages();
