@@ -91,7 +91,7 @@ const imageFiles = [
   "matchavera-premium-logo-style-10-cosmetic-emblem.png"
 ];
 
-const tabOrder = ["web", "logos", "notes"];
+const tabOrder = ["web", "notes"];
 
 const priorityFiles = [
   "matchavera-big-sweep-08-high-luxury-skincare.png",
@@ -204,20 +204,13 @@ const images = imageFiles.map((file) => ({
   score: getSortScore(file)
 }));
 
-const webImages = images
-  .filter((image) => !isLogoOnly(image.file))
-  .sort((a, b) => a.score - b.score || imageFiles.indexOf(a.file) - imageFiles.indexOf(b.file));
-
-const logoImages = images
-  .filter((image) => isLogoOnly(image.file))
+const orderedImages = images
   .sort((a, b) => a.score - b.score || imageFiles.indexOf(a.file) - imageFiles.indexOf(b.file));
 
 const tabButtons = [...document.querySelectorAll(".tab-button")];
 const tabPanels = [...document.querySelectorAll(".tab-panel")];
 const appShell = document.querySelector(".app-shell");
 const webFeed = document.querySelector("#web-feed");
-const webLogoGallery = document.querySelector("#web-logo-gallery");
-const logoGallery = document.querySelector("#logo-gallery");
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = lightbox.querySelector("img");
 const lightboxCaption = lightbox.querySelector(".lightbox-caption");
@@ -263,9 +256,7 @@ function createReferenceItem(image, index) {
 }
 
 function renderImages() {
-  webFeed.replaceChildren(...webImages.map(createReferenceItem));
-  webLogoGallery.replaceChildren(...logoImages.map(createReferenceItem));
-  logoGallery.replaceChildren(...logoImages.map(createReferenceItem));
+  webFeed.replaceChildren(...orderedImages.map(createReferenceItem));
 }
 
 function setActiveTab(tab) {
@@ -319,7 +310,6 @@ appShell.addEventListener(
   "touchend",
   (event) => {
     if (!touchStartX || !event.changedTouches.length) return;
-    if (event.target.closest(".logo-gallery")) return;
     const deltaX = event.changedTouches[0].clientX - touchStartX;
     const deltaY = event.changedTouches[0].clientY - touchStartY;
     touchStartX = 0;

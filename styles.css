@@ -136,7 +136,6 @@ a {
 
 .intro h1,
 .panel-heading h2,
-.section-heading h2,
 .note-card h3,
 .reference-item h3 {
   margin: 0;
@@ -171,14 +170,12 @@ a {
   margin-bottom: 20px;
 }
 
-.panel-heading h2,
-.section-heading h2 {
+.panel-heading h2 {
   font-size: clamp(30px, 4vw, 50px);
   line-height: 1.04;
 }
 
-.panel-heading p:not(.eyebrow),
-.section-heading p:not(.eyebrow) {
+.panel-heading p:not(.eyebrow) {
   max-width: 720px;
   margin: 0;
   color: var(--muted);
@@ -241,50 +238,6 @@ a {
 
 .item-meta {
   color: var(--deep);
-}
-
-.web-logo-section {
-  min-width: 0;
-  margin-top: clamp(36px, 6vw, 72px);
-  padding-top: clamp(24px, 4vw, 38px);
-  border-top: 1px solid var(--line);
-}
-
-.section-heading {
-  display: grid;
-  min-width: 0;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.logo-gallery {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(280px, 74%);
-  gap: 16px;
-  min-width: 0;
-  margin-inline: calc(max(14px, env(safe-area-inset-left)) * -1) calc(max(14px, env(safe-area-inset-right)) * -1);
-  padding: 2px max(14px, env(safe-area-inset-left)) 18px max(14px, env(safe-area-inset-right));
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-}
-
-.logo-gallery .reference-item {
-  scroll-snap-align: start;
-}
-
-.logo-gallery .reference-body {
-  padding: 16px;
-}
-
-.logo-gallery .reference-body h3 {
-  font-size: 22px;
-}
-
-.web-logo-gallery {
-  margin-top: 4px;
 }
 
 .notes-grid {
@@ -378,12 +331,6 @@ a {
   line-height: 1.45;
 }
 
-@media (min-width: 980px) {
-  .logo-gallery {
-    grid-auto-columns: minmax(360px, 48%);
-  }
-}
-
 @media (max-width: 760px) {
   .site-header {
     grid-template-columns: 1fr;
@@ -392,7 +339,7 @@ a {
 
   .tab-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px;
     overflow-x: visible;
     margin-inline: 0;
@@ -421,7 +368,4 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .logo-gallery {
-    grid-auto-columns: minmax(260px, 88%);
-  }
 }
